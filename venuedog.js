@@ -15,6 +15,7 @@
     var t0 = new Date();
     var t1 = new Date();
     t1.setDate(t1.getDate() + 7);
+    var list = '';
 
     var settings = $.extend({
       'start_date' : t0.getFullYear() + "-" + (t0.getMonth() + 1) + "-" + t0.getDate(),
@@ -29,32 +30,32 @@
     });
 
     var events_url = "http://venuedog.com/woof/events/show_by_date?" + query.join("");
-    console.log(events_url);
 
 
 
     /* Get Data from VenueDog.com */
     $.getJSON(events_url + "&callback=?", function(data){
 
-      $(event_wrapper).prepend('</ul>');
+      list += '<ul>';
       $.each(data, function(i, group){
         
 
         /* Events Grouped by Day */
         if(settings.list_by == "day"){
+          list += "<li>" + "DATE" + "<ul>";
           $.each(group, function(j, ev){
-            
-            out = ev.name + " @ " + ev.venue_id + " (" + ev.start_time + ")";
-            $(event_wrapper).append("<li>" + out +"</li>");
-          
+            out = ev.name + " @ " + ev.venue_name + " (" + ev.start_time + ")";
+            list += "<li>" + out + "</li>";
           });
+          list += "</ul></li>";
         }
 
 
 
       });
-      $(event_wrapper).prepend('</ul>');
+      list += '</ul>';
 
+      $(event_wrapper).html(list);
     });
 
   };
