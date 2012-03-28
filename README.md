@@ -1,7 +1,7 @@
 # JavaScript API Wrapper for VenueDog Events API 
 Find Local Events @ [VenueDog](http://venuedog.com/)
 
-# Requires
+# Requirments
 
 * Include jQuery
 * Include venuedog.js
