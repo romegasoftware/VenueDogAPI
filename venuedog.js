@@ -28,31 +28,19 @@
       'list_by'    :  "day"
     }, args);
 
-    var query = [];
-    $.each(settings, function(key, val){
-      query.push("&" + key + "=" + val);  
-    });
-    var events_url = src + "woof/events/show_by_date?" + query.join("");
-
+    events_url = build_events_url(src, settings);
 
     /* Initialize Events by Day display */
     if(settings.list_by == "day"){
-      list = get_week(src, events_url, event_wrapper);
-
-      /* Bind next and previous buttons to actions */
-      $(selector + " a.next_events").click( function(e){
-        e.preventDefault();
-        show_week();
-      });
+      list = load_week(src, events_url, event_wrapper, settings, selector);
     }
-
 
   };
 
 
 
   /* Events Grouped by Day */
-  var get_week = function(src, events_url, event_wrapper) {
+  var load_week = function(src, events_url, event_wrapper, settings, selector) {
 
     /* Get Data from VenueDog.com */
     $.getJSON(events_url + "&callback=?", function(data){
@@ -74,10 +62,41 @@
       tmp += '<li><a class="next_events" href="#next">Next</a></li>';
       tmp += '</ul>';
 
-      $(event_wrapper).html(tmp);
+      $(event_wrapper).hide().html(tmp).fadeIn('slow');
+
+
+      /* Bind next and previous buttons to actions */
+      $(selector + ' a.next_events').click( function(e){
+        e.preventDefault();
+        t0 = new Date(settings.start_date);
+        console.log(t0);
+        t0.setDate(t0.getDate() + 7);
+        t1 = new Date(settings.end_date);
+        t1.setDate(t1.getDate() + 7);
+        sd = t0.getFullYear() + "-" + (t0.getMonth() + 1) + "-" + t0.getDate();
+        ed = t1.getFullYear() + "-" + (t1.getMonth() + 1) + "-" + t1.getDate();
+        settings.start_date = t0;
+        settings.end_date = t1;
+        new_events_url = build_events_url(src, settings);
+
+        load_week(src, new_events_url, event_wrapper, settings, selector);
+      });
     });
 
   }
+
+
+
+  /* Build API query string from date data */
+  var build_events_url = function(src, settings){
+    var query = [];
+    $.each(settings, function(key, val){
+      query.push("&" + key + "=" + val);  
+    });
+    events_url = src + "woof/events/show_by_date?" + query.join("");
+    return events_url;
+  }
+
 
 
 
