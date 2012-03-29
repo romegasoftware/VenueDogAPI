@@ -15,6 +15,7 @@
     var t0 = new Date();
     var t1 = new Date();
     t1.setDate(t1.getDate() + 7);
+    var src = "http://venuedog.com/";
     var list = '';
 
     var settings = $.extend({
@@ -28,7 +29,7 @@
     $.each(settings, function(key, val){
       query.push("&" + key + "=" + val);  
     });
-    var events_url = "http://venuedog.com/woof/events/show_by_date?" + query.join("");
+    var events_url = src + "woof/events/show_by_date?" + query.join("");
 
 
     /* Get Data from VenueDog.com */
@@ -39,11 +40,12 @@
 
         /* Events Grouped by Day */
         if(settings.list_by == "day"){
-          /* Fri Mar 30 2012 */
           day = new Date(date);
           list += "<li>" + day.toLocaleDateString() + "<ul>";
           $.each(group, function(j, ev){
-            out = ev.name + " @ " + ev.venue_name + " (" + ev.start_time + ")";
+            event_url = src + "events/" + ev.id;
+            event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
+            out = event_link + " @ " + ev.venue_name + " (" + ev.start_time + ")";
             list += "<li>" + out + "</li>";
           });
           list += "</ul></li>";
