@@ -28,29 +28,26 @@
     $.each(settings, function(key, val){
       query.push("&" + key + "=" + val);  
     });
-
     var events_url = "http://venuedog.com/woof/events/show_by_date?" + query.join("");
-
 
 
     /* Get Data from VenueDog.com */
     $.getJSON(events_url + "&callback=?", function(data){
 
       list += '<ul>';
-      $.each(data, function(i, group){
-        
+      $.each(data, function(date, group){
 
         /* Events Grouped by Day */
         if(settings.list_by == "day"){
-          list += "<li>" + "DATE" + "<ul>";
+          /* Fri Mar 30 2012 */
+          day = new Date(date);
+          list += "<li>" + day.toLocaleDateString() + "<ul>";
           $.each(group, function(j, ev){
             out = ev.name + " @ " + ev.venue_name + " (" + ev.start_time + ")";
             list += "<li>" + out + "</li>";
           });
           list += "</ul></li>";
         }
-
-
 
       });
       list += '</ul>';
