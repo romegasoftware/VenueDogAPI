@@ -59,7 +59,7 @@
         tmp += "</ul></li>";
       });
 
-      tmp += '<li><a class="next_events" href="#next">Next</a></li>';
+      tmp += '<li><a class="prev_events" href="#previous">Previous</a><br /><a class="next_events" href="#next">Next</a></li>';
       tmp += '</ul>';
 
       $(event_wrapper).hide().html(tmp).fadeIn('slow');
@@ -81,8 +81,23 @@
 
         load_week(src, new_events_url, event_wrapper, settings, selector);
       });
-    });
+      $(selector + ' a.prev_events').click( function(e){
+        e.preventDefault();
+        t0 = new Date(settings.start_date);
+        console.log(t0);
+        t0.setDate(t0.getDate() - 7);
+        t1 = new Date(settings.end_date);
+        t1.setDate(t1.getDate() - 7);
+        sd = t0.getFullYear() + "-" + (t0.getMonth() + 1) + "-" + t0.getDate();
+        ed = t1.getFullYear() + "-" + (t1.getMonth() + 1) + "-" + t1.getDate();
+        settings.start_date = t0;
+        settings.end_date = t1;
+        new_events_url = build_events_url(src, settings);
 
+        load_week(src, new_events_url, event_wrapper, settings, selector);
+      });
+
+    });
   }
 
 
