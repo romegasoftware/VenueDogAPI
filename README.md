@@ -4,6 +4,7 @@ Find Local Events @ [VenueDog](http://venuedog.com/)
 # Requirements
 
 * Include jQuery
+* Include Date.js
 * Include venuedog.js
 
 # Example Use

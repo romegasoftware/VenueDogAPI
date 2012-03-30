@@ -53,13 +53,14 @@
         $.each(group, function(j, ev){
             event_url = src + "events/" + ev.id;
             event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
-            out = event_link + " @ " + ev.venue_name + " (" + ev.start_time + ")";
+            event_time = new Date(ev.start_time);
+            out = event_link + " @ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
             tmp += "<li>" + out + "</li>";
         });
         tmp += "</ul></li>";
       });
 
-      tmp += '<li><a class="prev_events" href="#previous">Previous</a><br /><a class="next_events" href="#next">Next</a></li>';
+      tmp += '<li class="cron"><a class="prev_events" href="#previous">Previous</a><br /><a class="next_events" href="#next">Next</a></li>';
       tmp += '</ul>';
 
       $(event_wrapper).hide().html(tmp).fadeIn('slow');
@@ -69,7 +70,6 @@
       $(selector + ' a.next_events').click( function(e){
         e.preventDefault();
         t0 = new Date(settings.start_date);
-        console.log(t0);
         t0.setDate(t0.getDate() + 7);
         t1 = new Date(settings.end_date);
         t1.setDate(t1.getDate() + 7);
@@ -84,7 +84,6 @@
       $(selector + ' a.prev_events').click( function(e){
         e.preventDefault();
         t0 = new Date(settings.start_date);
-        console.log(t0);
         t0.setDate(t0.getDate() - 7);
         t1 = new Date(settings.end_date);
         t1.setDate(t1.getDate() - 7);
