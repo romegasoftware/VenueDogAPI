@@ -48,7 +48,7 @@
 
       $.each(data, function(the_date, group){
         day = new Date(the_date);
-        tmp += "<li>" + day.toLocaleDateString() + "<ul>";
+        tmp += "<li>" + day.addHours(24).toString("ddd, MMM d, yyyy") + "<ul>";
 
         $.each(group, function(j, ev){
             event_url = src + "events/" + ev.id;
@@ -60,7 +60,7 @@
         tmp += "</ul></li>";
       });
 
-      tmp += '<li class="cron"><a class="prev_events" href="#previous">Previous</a><br /><a class="next_events" href="#next">Next</a></li>';
+      tmp += '<li class="cron"><a class="prev_events" href="#previous">Previous</a>&nbsp;<a class="next_events" href="#next">Next</a></li>';
       tmp += '</ul>';
 
       $(event_wrapper).hide().html(tmp).fadeIn('slow');
