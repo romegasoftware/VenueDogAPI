@@ -24,3 +24,9 @@ Find Local Events @ [VenueDog](http://venuedog.com/)
   });
 </script>
 ```
+
+
+# See in action
+
+* WordPress [VenueDog-Events Plugin](http://wordpress.org/extend/plugins/venuedog-events/)
+* [VenueDog Blog](http://blog.venuedog.com/)
