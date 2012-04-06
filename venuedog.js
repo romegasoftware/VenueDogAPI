@@ -18,10 +18,7 @@
     var t0 = new Date();
     var t1 = new Date();
     tmp_paginate = args.paginate > 0 ? args.paginate : 7;
-    console.log(args);
     t1.setDate(t1.getDate() + tmp_paginate);
-    console.log(t0);
-    console.log(t1);
     var src = "http://venuedog.com/";
     var list = '';
 
@@ -32,8 +29,6 @@
       'paginate' : "7",
       'list_by'    :  "day"
     }, args);
-
-    console.log(settings);
 
     events_url = build_events_url(src, settings);
 
@@ -115,7 +110,6 @@
       query.push("&" + key + "=" + val);  
     });
     events_url = src + "woof/events/show_by_date?" + query.join("");
-    console.log(events_url);
     return events_url;
   }
 
