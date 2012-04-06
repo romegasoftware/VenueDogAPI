@@ -17,7 +17,10 @@ Find Local Events @ [VenueDog](http://venuedog.com/)
 
 <script>
   $(document).ready(function(){
-    $('.events').venuedog();
+    $('.events').venuedog({
+      'categories' : "1,2,3,4", 
+      'paginate' : 7
+    });
   });
 </script>
 ```
