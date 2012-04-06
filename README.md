@@ -28,5 +28,5 @@ Find Local Events @ [VenueDog](http://venuedog.com/)
 
 # See in action
 
-* WordPress [VenueDog-Events Plugin](http://wordpress.org/extend/plugins/venuedog-events/)
-* [VenueDog Blog](http://blog.venuedog.com/)
+* Checkout the WordPress [VenueDog-Events Plugin](http://wordpress.org/extend/plugins/venuedog-events/)
+* Use it in real time at the [VenueDog Blog](http://blog.venuedog.com/)
