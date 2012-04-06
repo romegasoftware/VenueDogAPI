@@ -12,6 +12,7 @@ Find Local Events @ [VenueDog](http://venuedog.com/)
 
 ```
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+<script src="/date.js"></script>
 <script src="venuedog.js"></script>
 
 
