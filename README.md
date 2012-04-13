@@ -1,5 +1,11 @@
 # JavaScript API Wrapper for VenueDog Events API 
-Find Local Events @ [VenueDog](http://venuedog.com/)
+
+Find Local Events @ [VenueDog](http://venuedog.com/). The go-to place for what-to-do.
+
+VenueDog is a simple but powerful answer to the question, "What's Going on?" in a particular city. Through a combination of curated and user-generated listings, VenueDog delivers information about all events in a particular location seachable by date, category, and venue.
+
+We want you to find what you are looking for, discover new things, and share with friends. 
+
 
 # Requirements
 
