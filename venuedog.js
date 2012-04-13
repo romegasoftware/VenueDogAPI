@@ -30,10 +30,14 @@
     var list = '';
     settings.events_url = build_events_url(settings);
 
-    /* Initialize Events by Day display */
+    /* Initialize events display based on list_by */
     if(settings.list_by == "day"){
       list = load_week(settings);
     }
+    else if(settings.list_by == "day_scroll"){
+      list = load_scroll(settings);
+    }
+
 
   };
 
@@ -101,6 +105,67 @@
                  "&end_date=" + settings.end_date.toString("yyyy-M-d") + "&categories=" + settings.categories;
     return encodeURI(events_url);
   }
+
+
+
+
+
+
+
+  /* Infinite Scroll of Events by Day */
+  var load_scroll = function(settings){
+    /* Get Data from VenueDog.com */
+    $.getJSON(settings.events_url + "&callback=?", function(data){
+      tmp = '<ul>';
+
+      $.each(data, function(the_date, group){
+        day = new Date( Date.parse(the_date));
+        tmp += '<li class="day">' + day.toString("ddd, MMM d, yyyy") + "<ul>";
+
+        $.each(group, function(j, ev){
+            event_url = settings.src + "events/" + ev.id;
+            event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
+            event_time = new Date( Date.parse( ev.start_time.replace('Z', '') ));
+            out = event_link + " @ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
+            tmp += "<li>" + out + "</li>";
+        });
+        tmp += "</ul></li>";
+      });
+
+      tmp += '<li class="cron"><a class="prev_events" href="#previous">Previous</a>&nbsp;<a class="next_events" href="#next">Next</a></li>';
+      tmp += '</ul>';
+
+      $(settings.selector).hide().html(tmp).fadeIn('slow');
+
+
+      /* Bind next and previous buttons to actions */
+      $(settings.selector + ' a.next_events').click( function(e){
+        e.preventDefault();
+
+        settings.start_date = settings.start_date.add(parseInt(settings.paginate)).days();
+        settings.end_date   = settings.end_date.add(parseInt(settings.paginate)).days();
+        settings.events_url = build_events_url(settings);
+
+        load_week( settings );
+      });
+      $(settings.selector + ' a.prev_events').click( function(e){
+        e.preventDefault();
+
+        settings.start_date = settings.start_date.add(parseInt(settings.paginate) * -1).days();
+        settings.end_date   = settings.end_date.add(parseInt(settings.paginate) * -1).days();
+        settings.events_url = build_events_url(settings);
+
+        load_week( settings );
+      });
+
+    });
+    
+    
+  }
+
+
+
+
 
 
 
