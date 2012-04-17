@@ -18,18 +18,32 @@ We want you to find what you are looking for, discover new things, and share wit
 
 ```
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-<script src="/date.js"></script>
+<script src="date.js"></script>
 <script src="venuedog.js"></script>
 
 
 <script>
   $(document).ready(function(){
+
+    // Creates a paginated list with Previous and Next buttons
     $('.events').venuedog({
-      'categories' : "1,2,3,4", 
-      'paginate' : 7
+      categories : "1,2,3,4", 
+      paginate   : 7
     });
+
+
+    // Creates a infinite scrolling list that grows as the user scrolls down
+    $('.events').venuedog({
+      categories : "1,2,3,4", 
+      list_by    : 'day_scroll'
+      paginate   : 7
+    });
+
   });
 </script>
+
+
+
 ```
 
 
