@@ -37,7 +37,6 @@
     else if(settings.list_by == "day_scroll"){
 
       settings.ajax_loading = true;
-      $(setting.selector)
       window.vdog_settings = settings;
       list = load_scroll(settings);
  
