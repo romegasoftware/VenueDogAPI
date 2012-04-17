@@ -37,6 +37,7 @@
     else if(settings.list_by == "day_scroll"){
 
       settings.ajax_loading = true;
+      $(setting.selector)
       window.vdog_settings = settings;
       list = load_scroll(settings);
  
@@ -172,29 +173,7 @@
 
       $(settings.selector).append(tmp).fadeIn('slow');
 
-
-      /* Bind next and previous buttons to actions */
-      $(settings.selector + ' a.next_events').click( function(e){
-        e.preventDefault();
-
-        settings.start_date = settings.start_date.add(parseInt(settings.paginate)).days();
-        settings.end_date   = settings.end_date.add(parseInt(settings.paginate)).days();
-        settings.events_url = build_events_url(settings);
-
-        load_week( settings );
-      });
-      $(settings.selector + ' a.prev_events').click( function(e){
-        e.preventDefault();
-
-        settings.start_date = settings.start_date.add(parseInt(settings.paginate) * -1).days();
-        settings.end_date   = settings.end_date.add(parseInt(settings.paginate) * -1).days();
-        settings.events_url = build_events_url(settings);
-
-        load_week( settings );
-      });
-
       vdog_settings.ajax_loading = false;
-
     });
     
     
