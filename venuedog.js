@@ -37,6 +37,8 @@
     else if(settings.list_by == "day_scroll"){
 
       settings.ajax_loading = true;
+      $(settings.selector).after('<p class="vdog_loading"><img src="images/vdog.png" /> <img src="images/loading.gif" /></p>');
+      $("p.vdog_loading").hide();
       window.vdog_settings = settings;
       list = load_scroll(settings);
  
@@ -151,6 +153,7 @@
   /* Infinite Scroll of Events by Day */
   var load_scroll = function(settings){
     vdog_settings.ajax_loading = true;
+    $("p.vdog_loading").show();
     /* Get Data from VenueDog.com */
     $.getJSON(settings.events_url + "&callback=?", function(data){
       tmp = '<ul>';
@@ -173,6 +176,7 @@
       $(settings.selector).append(tmp).fadeIn('slow');
 
       vdog_settings.ajax_loading = false;
+      $("p.vdog_loading").fadeOut();
     });
     
     
