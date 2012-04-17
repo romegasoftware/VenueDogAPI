@@ -35,11 +35,21 @@
       list = load_week(settings);
     }
     else if(settings.list_by == "day_scroll"){
+
+      settings.ajax_loading = true;
+      window.vdog_settings = settings;
       list = load_scroll(settings);
+ 
+      setInterval( function(){ check_scroll();}, 500 );
+
     }
 
 
   };
+
+
+
+
 
 
 
@@ -110,10 +120,37 @@
 
 
 
+ /**
+  *  Calls events append methos if user has 
+  *  scrolled to bottom of page
+  */
+  var check_scroll = function(){
+    var contentHeight = $(vdog_settings.selector).height();
+    var pageHeight = document.documentElement.clientHeight;  
+    var scrollPosition; 
+
+
+    if(navigator.appName == "Microsoft Internet Explorer") {
+      scrollPosition = document.documentElement.scrollTop; 
+    }
+    else {
+      scrollPosition = window.pageYOffset;
+    }
+
+    if(( contentHeight - pageHeight - scrollPosition) < 100){ 
+      if(vdog_settings.ajax_loading == false){
+        vdog_settings.start_date = vdog_settings.start_date.add(parseInt(vdog_settings.paginate)).days();
+        vdog_settings.end_date   = vdog_settings.end_date.add(parseInt(vdog_settings.paginate)).days();
+        vdog_settings.events_url = build_events_url(vdog_settings);
+        load_scroll(vdog_settings);
+      }
+    }
+  }
 
 
   /* Infinite Scroll of Events by Day */
   var load_scroll = function(settings){
+    vdog_settings.ajax_loading = true;
     /* Get Data from VenueDog.com */
     $.getJSON(settings.events_url + "&callback=?", function(data){
       tmp = '<ul>';
@@ -131,11 +168,9 @@
         });
         tmp += "</ul></li>";
       });
-
-      tmp += '<li class="cron"><a class="prev_events" href="#previous">Previous</a>&nbsp;<a class="next_events" href="#next">Next</a></li>';
       tmp += '</ul>';
 
-      $(settings.selector).hide().html(tmp).fadeIn('slow');
+      $(settings.selector).append(tmp).fadeIn('slow');
 
 
       /* Bind next and previous buttons to actions */
@@ -158,6 +193,8 @@
         load_week( settings );
       });
 
+      vdog_settings.ajax_loading = false;
+
     });
     
     
@@ -165,6 +202,15 @@
 
 
 
+
+  function scroll(){
+    if(navigator.appName == "Microsoft Internet Explorer"){
+      scrollPosition = document.documentElement.scrollTop;
+    }
+    else{
+      scrollPosition = window.pageYOffset;
+    }
+  }
 
 
 
