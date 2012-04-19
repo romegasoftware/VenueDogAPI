@@ -64,7 +64,7 @@
 
       $.each(data, function(the_date, group){
         day = new Date( Date.parse(the_date));
-        tmp += '<li class="day">' + day.toString("ddd, MMM d, yyyy") + "<ul>";
+        tmp += '<li class="day">' + day.toString("dddd, MMMM d") + "<ul>";
 
         $.each(group, function(j, ev){
             event_url = settings.src + "events/" + ev.id;
