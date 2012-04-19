@@ -17,8 +17,8 @@
     /* Override defaults with arguments and convert to query string*/
     
     var settings = $.extend({
-        'categories' : "1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17",
-        'paginate'   : "7",
+        'categories' : "1,2,3,4,5,6,7,8,9,10,11,12,13,14,38,51,56,55,58,15",
+        'paginate'   : "14",
         'list_by'    :  "day",
         'src'        :  "http://venuedog.com/",
         'selector'   : this.selector
@@ -70,7 +70,7 @@
             event_url = settings.src + "events/" + ev.id;
             event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
             event_time = new Date( Date.parse( ev.start_time.replace('Z', '') ));
-            out = event_link + " @ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
+            out = event_link + " <br />&nbsp;@ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
             tmp += "<li>" + out + "</li>";
         });
         tmp += "</ul></li>";
@@ -160,7 +160,7 @@
 
       $.each(data, function(the_date, group){
         day = new Date( Date.parse(the_date));
-        tmp += '<li class="day">' + day.toString("ddd, MMM d, yyyy") + "<ul>";
+        tmp += '<li class="day">' + day.toString("dddd, MMMM d") + "<ul>";
 
         $.each(group, function(j, ev){
             event_url = settings.src + "events/" + ev.id;
