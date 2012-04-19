@@ -94,6 +94,7 @@
         settings.start_date = settings.start_date.add(parseInt(settings.paginate)).days();
         settings.end_date   = settings.end_date.add(parseInt(settings.paginate)).days();
         settings.events_url = build_events_url(settings);
+        $('html,body').animate({scrollTop: $(settings.selector).offset().top},'slow')
 
         load_week( settings );
       });
@@ -104,6 +105,7 @@
         settings.end_date   = settings.end_date.add(parseInt(settings.paginate) * -1).days();
         settings.events_url = build_events_url(settings);
 
+        $('html,body').animate({scrollTop: $(settings.selector).offset().top},'slow')
         load_week( settings );
       });
 
