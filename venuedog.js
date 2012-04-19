@@ -24,8 +24,13 @@
         'selector'   : this.selector
     }, args);
 
+
     settings.start_date = Date.today();
     settings.end_date   = Date.today().add(parseInt(settings.paginate)).days();
+    if(Date.now().getHours() < 4 ){
+      settings.start_date = Date.today().add(-1).days();
+      settings.end_date   = Date.today().add(-1).days().add(parseInt(settings.paginate)).days();
+    }
 
     var list = '';
     settings.events_url = build_events_url(settings);
