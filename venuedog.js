@@ -20,7 +20,7 @@
         'categories' : "1,2,3,4,5,6,7,8,9,10,11,12,13,14,38,51,56,55,58,15",
         'paginate'   : "14",
         'list_by'    :  "day",
-        'src'        :  "http://venuedog.com/",
+        'src'        :  "http://www.venuedog.com/",
         'selector'   : this.selector
     }, args);
 
