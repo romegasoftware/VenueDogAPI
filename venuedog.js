@@ -120,7 +120,7 @@
     $.each(settings, function(key, val){
       query.push("&" + key + "=" + val);  
     });
-    events_url = settings.src + "woof/rome/events/show_by_date?" + "start_date=" + settings.start_date.toString("yyyy-M-d") +
+    events_url = settings.src + "woof/events/show_by_date?" + "start_date=" + settings.start_date.toString("yyyy-M-d") +
                  "&end_date=" + settings.end_date.toString("yyyy-M-d") + "&categories=" + settings.categories;
     return encodeURI(events_url);
   }
