@@ -72,7 +72,7 @@
         tmp += '<li class="day">' + day.toString("dddd, MMMM d") + "<ul>";
 
         $.each(group, function(j, ev){
-            event_url = settings.src + "events/" + ev.id;
+            event_url = settings.src + "rome/events/" + ev.id;
             event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
             event_time = new Date( Date.parse( ev.start_time.replace('Z', '') ));
             out = event_link + " <br />&nbsp;@ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
@@ -120,7 +120,7 @@
     $.each(settings, function(key, val){
       query.push("&" + key + "=" + val);  
     });
-    events_url = settings.src + "woof/events/show_by_date?" + "start_date=" + settings.start_date.toString("yyyy-M-d") +
+    events_url = settings.src + "woof/rome/events/show_by_date?" + "start_date=" + settings.start_date.toString("yyyy-M-d") +
                  "&end_date=" + settings.end_date.toString("yyyy-M-d") + "&categories=" + settings.categories;
     return encodeURI(events_url);
   }
@@ -170,7 +170,7 @@
         tmp += '<li class="day">' + day.toString("dddd, MMMM d") + "<ul>";
 
         $.each(group, function(j, ev){
-            event_url = settings.src + "events/" + ev.id;
+            event_url = settings.src + "rome/events/" + ev.id;
             event_link = '<a href="'+ event_url + '" target="_blank">' + ev.name +'</a>';
             event_time = new Date( Date.parse( ev.start_time.replace('Z', '') ));
             out = event_link + " @ " + ev.venue_name + " (" + event_time.toString("h:mm tt") + ")";
